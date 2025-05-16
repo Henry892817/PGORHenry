@@ -93,7 +93,7 @@ public class ZooManagement {
             System.out.println();
         }
 
-        // Additional behavior specific to subclasses
+    
         ((Lion) lion).hunt();
         ((Penguin) penguin).swim();
         ((Snake) snake).shedSkin();
