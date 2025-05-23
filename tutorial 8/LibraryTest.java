@@ -2,7 +2,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-// MediaItem interface
+
 interface MediaItem {
     String LIBRARY_NAME = "Digital Commons Library";
 
@@ -11,7 +11,7 @@ interface MediaItem {
     String getDisplayString();
 }
 
-// Rentable interface
+
 interface Rentable {
     int MAX_RENTAL_DAYS = 14;
 
@@ -25,13 +25,11 @@ interface Rentable {
     void returnItem();
 }
 
-// Rateable interface (optional)
 interface Rateable {
     void addRating(int rating); // 1-5 stars
     double getAverageRating();
 }
 
-// Book class
 class Book implements MediaItem, Rentable {
     private String title;
     private String author;
@@ -84,7 +82,6 @@ class Book implements MediaItem, Rentable {
     }
 }
 
-// Movie class
 class Movie implements MediaItem, Rentable, Rateable {
     private String title;
     private String director;
@@ -157,48 +154,37 @@ class Movie implements MediaItem, Rentable, Rateable {
     }
 }
 
-// Main class
 public class LibraryTest {
     public static void main(String[] args) {
-        // Display library name
         System.out.println("Welcome to " + MediaItem.LIBRARY_NAME);
         System.out.println("Maximum rental period: " + Rentable.MAX_RENTAL_DAYS + " days\n");
-
-        // Create and test a book
         Book book1 = new Book("The Great Gatsby", "F. Scott Fitzgerald", 1925, "978-0-7432-7356-5");
         System.out.println(book1.getDisplayString());
         System.out.println("Available: " + book1.isAvailable());
 
-        // Rent the book
         if (book1.rent()) {
             System.out.println("Book rented successfully!");
         }
         System.out.println("Available after rental: " + book1.isAvailable());
 
-        // Calculate late fee
         System.out.println("Late fee for 3 days: $" + Rentable.calculateLateFee(3));
 
-        // Return the book
         book1.returnItem();
         System.out.println("Available after return: " + book1.isAvailable() + "\n");
 
-        // Create and test a movie
         Movie movie1 = new Movie("Inception", "Christopher Nolan", 2010, 148);
         System.out.println(movie1.getDisplayString());
 
-        // Add ratings to the movie
         movie1.addRating(5);
         movie1.addRating(4);
         movie1.addRating(5);
 
         System.out.println("Average rating: " + movie1.getAverageRating() + " stars");
 
-        // Rent the movie
         if (movie1.rent()) {
             System.out.println("Movie rented successfully!");
         }
 
-        // Try to rent again (should fail)
         if (!movie1.rent()) {
             System.out.println("Movie is already rented!");
         }
